@@ -26,12 +26,19 @@ RUN git clone https://github.com/Koha-Community/Koha.git
 WORKDIR /home/${user}/Koha
 RUN git remote add ptfs https://github.com/ptfs-europe/koha.git
 COPY aux/koha-dev/ /home/${user}/koha-dev/
+USER root
+RUN chown -R ${user}:${user} /home/${user}/koha-dev
+USER ${user}
 RUN perl Makefile.PL --prev-install-log /home/${user}/koha-dev/misc/koha-install-log
 RUN make && make install
 COPY aux/koha-httpd.conf /home/${user}/koha-dev/etc/koha-httpd.conf
 COPY aux/koha-zebra-ctl.sh /home/${user}/koha-dev/bin/koha-zebra-ctl.sh
 COPY aux/koha-index-daemon-ctl.sh /home/${user}/koha-dev/bin/koha-index-daemon-ctl.sh
 USER root
+RUN chown ${user}:${user}                        \
+    /home/${user}/koha-dev/etc/koha-httpd.conf   \
+    /home/${user}/koha-dev/bin/koha-zebra-ctl.sh \
+    /home/${user}/koha-dev/bin/koha-index-daemon-ctl.sh
 
 RUN ln -s /home/${user}/koha-dev/etc/koha-httpd.conf \
     /etc/apache2/sites-available/koha
