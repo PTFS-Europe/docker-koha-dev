@@ -14,7 +14,7 @@
 # We can set installation defaults with environment variables and then
 # simply default during Makefile.PL.
 
-FROM localhost:5000/koha-base
+FROM atheia/koha-base
 MAINTAINER Alex Sassmannshausen <alex.sassmannshausen@ptfs-europe.com>
 
 # Koha Instance and Dev User Config
@@ -34,6 +34,10 @@ RUN make && make install
 COPY aux/koha-httpd.conf /home/${user}/koha-dev/etc/koha-httpd.conf
 COPY aux/koha-zebra-ctl.sh /home/${user}/koha-dev/bin/koha-zebra-ctl.sh
 COPY aux/koha-index-daemon-ctl.sh /home/${user}/koha-dev/bin/koha-index-daemon-ctl.sh
+RUN echo "export KOHA_CONF='/home/koha-dev/koha-dev/etc/koha-conf.xml'" \
+    >> /home/koha-dev/.bashrc
+RUN echo "export PERL5LIB='/home/koha-dev/Koha'" \
+    >> /home/koha-dev/.bashrc
 USER root
 RUN chown ${user}:${user}                        \
     /home/${user}/koha-dev/etc/koha-httpd.conf   \

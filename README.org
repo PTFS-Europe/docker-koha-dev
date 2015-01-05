@@ -1,0 +1,65 @@
+* Use
+
+  This docker project will allow you to create a git based koha
+  installation purely using docker.
+
+  As a result it is quite a bit more minimalist, and should be far
+  easier to understand than most other Koha docker installs.
+
+  The specific use case for this is to use the resulting container as
+  a persistent koha instance, into which you can load any number of
+  local git repositories for development purposes.
+
+  You can access the koha instance using port mapping.
+
+  You can also shell out to the container using nsenter.
+  
+* Installation
+
+  At present this project relies on a base image called
+  koha-base (the project's hosted at
+  https://github.com/ptfs-europe/docker-koha-base) available in the
+  docker registry.
+
+  Whilst koha-base is simple, it’s been split off this project because
+  I can envisage the former serving as base for different koha images.
+
+  You should be able to use this image simply by:
+  - cloning this repo,
+  - cd-ing into it
+  - building the image:
+    $ docker build -t="alex/koha-dev:init" .
+
+* Running
+
+  I run my dev instance as follows:
+
+  $ run --name=$instanceName -dp 8080:8080 -p 80:80 -v $path/to/local/dev/repo:/home/koha-dev/Koha $nameOfImage:$Revision
+
+  I can then stop this instance with
+
+  $ docker stop koha
+
+  And start it again with
+
+  $ docker start koha
+
+  You should be able to access Koha in your browser at localhost:80 //
+  localhost:8080.
+
+  The first time you access after running you will have to run through
+  the web-installer.
+
+  You can shell out to the container using an nsenter command such as:
+
+  $ sudo nsenter --target $pid --mount --uts --ipc --net --pid;
+
+  where $pid is the PID of the container. You can find this by:
+
+  $ sudo docker inspect --format {{.State.Pid}} $ContainerName 
+
+* Caveats
+
+  Currently the database is tied to the container. As a result,
+  whenever create a new container (e.g. after rebuilding the image)
+  you will start with an empty database again.
