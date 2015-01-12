@@ -29,6 +29,13 @@
   - cd-ing into it
   - building the image:
     $ docker build -t="alex/koha-dev:init" .
+  
+  /WARNING/: cloning koha will take long, and will provide no feedback
+  on progress.  Do not panic when it seems the following just hangs.
+  "
+  ---> Running in 24f0b16ae332
+  Cloning into 'Koha'...
+  "
 
 * Running
 
