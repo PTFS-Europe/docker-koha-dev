@@ -51,6 +51,8 @@ RUN ln -s /home/${user}/koha-dev/bin/koha-zebra-ctl.sh \
 RUN ln -s /home/${user}/koha-dev/bin/koha-index-daemon-ctl.sh \
     /etc/init.d/koha-index-daemon-ctl.sh
 
+RUN rm /etc/init.d/zebrasrv
+
 ENV HOME /root
 WORKDIR /root
 COPY aux/docker-entrypoint.sh /root/entrypoint.sh
