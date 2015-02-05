@@ -37,7 +37,7 @@ RUN perl Makefile.PL --prev-install-log \
 RUN make && make install
 RUN echo "export KOHA_CONF='/home/${user}/koha-dev/etc/koha-conf.xml'" \
     >> /home/${user}/.bashrc
-RUN echo "export PERL5LIB='/home/${user}/Koha'" \
+RUN echo "export PERL5LIB='/home/${user}/kohaclone'" \
     >> /home/${user}/.bashrc
 
 # Setup apache configuration
