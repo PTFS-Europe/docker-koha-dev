@@ -4,7 +4,7 @@ set -e
 KOHA_ADMINUSER=kohaadmin
 KOHA_ADMINPASS=koha@dev
 DB=koha
-USER=koha-dev
+USER=koha
 
 service mysql start
 if [ ! -f /root/lock ]; then
@@ -14,8 +14,6 @@ CREATE DATABASE IF NOT EXISTS $DB ; \
 GRANT ALL ON $DB.* TO '$KOHA_ADMINUSER'@'%' WITH GRANT OPTION ; \
 FLUSH PRIVILEGES ;" | mysql -u root
     touch /root/lock
-
-    a2ensite koha
 fi
 
 service apache2 start

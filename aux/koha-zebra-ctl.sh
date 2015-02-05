@@ -24,17 +24,17 @@
 # Short-Description: Zebra server daemon for Koha indexing
 ### END INIT INFO
 
-USER=koha-dev
-GROUP=koha-dev
+USER=koha
+GROUP=koha
 DBNAME=koha
 NAME=koha-zebra-ctl.$DBNAME
-LOGDIR=/home/koha-dev/koha-dev/var/log
+LOGDIR=/home/koha/koha-dev/var/log
 ERRLOG=$LOGDIR/koha-zebradaemon.err
 STDOUT=$LOGDIR/koha-zebradaemon.log
 OUTPUT=$LOGDIR/koha-zebradaemon-output.log
-KOHA_CONF=/home/koha-dev/koha-dev/etc/koha-conf.xml
-RUNDIR=/home/koha-dev/koha-dev/var/run/zebradb
-LOCKDIR=/home/koha-dev/koha-dev/var/lock/zebradb
+KOHA_CONF=/home/koha/koha-dev/etc/koha-conf.xml
+RUNDIR=/home/koha/koha-dev/var/run/zebradb
+LOCKDIR=/home/koha/koha-dev/var/lock/zebradb
 # you may need to change this depending on where zebrasrv is installed
 ZEBRASRV=/usr/bin/zebrasrv
 ZEBRAOPTIONS="-v none,fatal,warn"

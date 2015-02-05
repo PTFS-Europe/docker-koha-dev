@@ -27,13 +27,13 @@
 
 . /lib/lsb/init-functions
 
-USER=koha-dev
-GROUP=koha-dev
+USER=koha
+GROUP=koha
 DBNAME=koha
 NAME=koha-index-daemon-$DBNAME
-LOGDIR=/home/koha-dev/koha-dev/var/log
-PERL5LIB=/home/koha-dev/Koha
-KOHA_CONF=/home/koha-dev/koha-dev/etc/koha-conf.xml
+LOGDIR=/home/koha/koha-dev/var/log
+PERL5LIB=/home/koha/kohaclone
+KOHA_CONF=/home/koha/koha-dev/etc/koha-conf.xml
 ERRLOG=$LOGDIR/koha-index-daemon.err
 STDOUT=$LOGDIR/koha-index-daemon.log
 OUTPUT=$LOGDIR/koha-index-daemon-output.log
